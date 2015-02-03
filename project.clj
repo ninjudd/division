@@ -1,4 +1,4 @@
-(defproject com.ninjudd/division "0.1.0-SNAPSHOT"
+(defproject com.ninjudd/division "0.1.0"
   :description "Simple parser combinator for Clojure and Clojurescript."
   :url "http://github.com/ninjudd/division"
   :license {:name "Eclipse Public License"
