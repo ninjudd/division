@@ -83,6 +83,17 @@
       (when (pred val)
         [val consumed stream]))))
 
+(defn exclude-trailing
+  "After parsing, apply rparse to the consumed stream in reverse, removing anything that matches
+  and then reparsing."
+  [parse rparse]
+  (fn [stream]
+    (when-let [[val consumed stream] (parse stream)]
+      (if-let [[_ rtail rhead] (rparse (reverse consumed))]
+        (when-let [[val consumed head] (parse (reverse rhead))]
+          [val consumed (concat head (reverse rtail) stream)])
+        [val consumed stream]))))
+
 (defn followed-by [parse pred]
   (fn [stream]
     (when-let [[val consumed stream] (parse stream)]
